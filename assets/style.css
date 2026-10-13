@@ -1180,3 +1180,4 @@ section.tight { padding: var(--space-5) 0; }
   .hero-sm .hero-illo { display: none; }
   .hero-illo { min-height: 240px; }
 }
+.dl-item:nth-child(5) { box-shadow: 5px 5px 0 var(--coral); }

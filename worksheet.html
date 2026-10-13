@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Φύλλο αναζήτησης · Από το Prompt στη Δήλωση · Copilot Edition</title>
+  <meta name="description" content="Από το ερευνητικό ερώτημα σε φράση αναζήτησης για το ERIC: πλαίσιο, έννοιες, συνώνυμα, AND/OR.">
+  <link rel="stylesheet" href="assets/style.css">
+  
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><span class="spark">Από</span> το Prompt στη Δήλωση</a>
+    <ul class="nav-links"><li><a href="index.html">Αρχική</a></li><li><a href="prepare.html">Προετοιμασία</a></li><li><a href="copilot.html">Οδηγός Copilot</a></li><li><a href="session-1.html" class="active">Συνάντηση 1</a></li><li><a href="session-2.html">Συνάντηση 2</a></li><li><a href="prompts.html">Prompts</a></li><li><a href="materials.html">Υλικό</a></li><li><a href="instructor.html">Διδάσκοντες/ουσες</a></li></ul>
+  </div>
+</nav>
+
+<header class="hero hero-sm">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="eyebrow fade-up">Ενότητα 3 · Δοκιμή</div>
+        <h1 class="hero-title fade-up">Φύλλο <span class="hand">αναζήτησης</span></h1>
+        <p class="hero-subtitle fade-up">Από το ερώτημά σου σε μια φράση αναζήτησης για το ERIC, βήμα-βήμα. Η φράση χτίζεται αυτόματα όσο γράφεις.</p>
+        <div class="cta-group fade-up"><a href="frameworks.html" class="btn btn-sm btn-outline">📐 Πλαίσια ερωτήματος</a><a href="downloads/05_Frameworks_Worksheet.docx" download class="btn btn-sm btn-outline">⬇ .docx</a></div>
+        
+      </div>
+      <div class="hero-illo">
+        <div class="hero-shape shape-1"></div>
+        <div class="hero-shape shape-2"></div>
+        <div class="hero-shape shape-3"></div>
+        <div class="hero-shape shape-4"></div>
+        <div class="hero-label">🔎<br><span>AND · OR ✦</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="tight">
+  <div class="container" style="max-width:52rem;">
+    <div class="box box-info" style="margin-top:0;">
+      <strong>Τίποτα δεν αποθηκεύεται</strong>
+      <p>Αν κλείσεις τη σελίδα, τα στοιχεία χάνονται. Αντίγραψε τη φράση σου σε ένα έγγραφο πριν φύγεις.</p>
+    </div>
+
+    <div class="card form-card">
+      <h3>Βήμα 1 · Το ερώτημά σου</h3>
+      <label for="q">Γράψε το ερευνητικό σου ερώτημα (με δικά σου λόγια)</label>
+      <textarea id="q" placeholder="π.χ. Ποιες είναι οι εμπειρίες των εκπαιδευτικών ειδικής αγωγής από τη χρήση GenAI στη διδασκαλία;"></textarea>
+      <label for="fw">Πλαίσιο</label>
+      <select id="fw" onchange="setFramework()">
+        <option value="PICO">PICO / PICOS</option>
+        <option value="PECO">PECO</option>
+        <option value="SPIDER">SPIDER</option>
+        <option value="PEO">PEO</option>
+        <option value="SPICE">SPICE</option>
+      </select>
+      <p style="font-size:.88rem;color:var(--muted);margin-top:6px;">Δεν ξέρεις ποιο; Δες τα <a href="frameworks.html">πλαίσια ερωτήματος</a>.</p>
+      <div id="fw-fields" class="two-col"></div>
+    </div>
+
+    <div class="card c-teal form-card">
+      <h3>Βήμα 2 · Έννοιες και συνώνυμα</h3>
+      <p style="color:var(--ink-soft);">Συνήθως 2–3 έννοιες αρκούν: δεν μπαίνουν όλα τα γράμματα του πλαισίου στην αναζήτηση (π.χ. το «Outcomes» ή ο «Σχεδιασμός» συχνά μένουν έξω). Για κάθε έννοια γράψε <strong>αγγλικούς</strong> όρους και πάτα <kbd>Enter</kbd> μετά από καθέναν.</p>
+      <div class="box box-warn"><strong>Πρώτα εσύ, μετά το Copilot</strong><p>Γράψε όσα συνώνυμα σκεφτείς μόνος/η σου. Μετά χρησιμοποίησε το <a href="prompts.html#p3">Prompt 3</a> για όσα σου ξέφυγαν.</p></div>
+      <div id="blocks"></div>
+      <button class="btn btn-sm btn-outline" onclick="addBlock('')" style="margin-top:var(--space-2);">+ Νέα έννοια</button>
+    </div>
+
+    <div class="card c-sun">
+      <h3>Βήμα 3 · Η φράση αναζήτησης</h3>
+      <p style="color:var(--ink-soft);">Μέσα σε κάθε έννοια οι όροι ενώνονται με <code>OR</code> (οποιοσδήποτε). Οι έννοιες μεταξύ τους με <code>AND</code> (όλες μαζί).</p>
+      <div class="prompt-box" id="out-wrap"><button class="copy-btn" onclick="copyText(this,'out')">Αντιγραφή</button><span id="out">Πρόσθεσε όρους στις έννοιες.</span></div>
+      <div class="cta-group" style="margin-top:0;">
+        <button class="btn btn-sm" onclick="openEric()">Αναζήτηση στο ERIC ↗</button>
+      </div>
+      <div class="box box-info" style="margin-bottom:0;"><strong>Πολλά ή λίγα αποτελέσματα;</strong><p>Χιλιάδες αποτελέσματα: λείπει μια έννοια ή κάποιος όρος είναι πολύ γενικός. Ελάχιστα: πολλές έννοιες ή πολύ στενοί όροι. Ζήτα εξήγηση από το Copilot με το <a href="prompts.html#p4">Prompt 4</a>.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="hand">Από</span> το Prompt στη Δήλωση</div>
+        <p class="footer-text">Σεμινάριο υπεύθυνης χρήσης της Παραγωγικής ΤΝ στη βιβλιογραφική ανασκόπηση, με το Microsoft Copilot. Σύμφωνα με τις κατευθυντήριες γραμμές HEAL-Link / ΣΕΑΒ.</p>
+        <p class="footer-text" style="margin-top:1rem;">Σχεδιασμένο για το <a href="https://maspecialed.sed.uth.gr/perigrammata-mathimatwn/" target="_blank" rel="noopener" style="color:var(--sun);">ΠΜΣ Ειδικής Αγωγής, Πανεπιστήμιο Θεσσαλίας</a>.</p>
+      </div>
+      <div>
+        <h5>Σελίδες</h5>
+        <ul>
+          <li><a href="prepare.html">Προετοιμασία</a></li>
+          <li><a href="copilot.html">Οδηγός Copilot</a></li>
+          <li><a href="frameworks.html">Πλαίσια ερωτήματος</a></li>
+          <li><a href="worksheet.html">Φύλλο αναζήτησης</a></li>
+          <li><a href="verify.html">Έλεγχος παραπομπών</a></li>
+          <li><a href="statement.html">Δήλωση Χρήσης ΤΝ</a></li>
+          <li><a href="about.html">Σχετικά</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Σύνδεσμοι</h5>
+        <ul>
+          <li><a href="https://m365.cloud.microsoft/chat" target="_blank" rel="noopener">Microsoft 365 Copilot Chat</a></li>
+          <li><a href="https://eric.ed.gov" target="_blank" rel="noopener">ERIC</a></li>
+          <li><a href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar</a></li>
+          <li><a href="https://www.doi.org" target="_blank" rel="noopener">doi.org</a></li>
+          <li><a href="https://www.heal-link.gr/" target="_blank" rel="noopener">HEAL-Link</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 · Ανοιχτό εκπαιδευτικό υλικό · CC BY-NC-SA 4.0</div>
+      <div>Copilot Edition · v1.0</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function copyText(btn, targetId) {
+  let text;
+  if (targetId) { text = document.getElementById(targetId).innerText.trim(); }
+  else {
+    const clone = btn.parentElement.cloneNode(true);
+    const b = clone.querySelector('.copy-btn'); if (b) b.remove();
+    text = clone.textContent.trim();
+  }
+  const done = function () {
+    const old = btn.dataset.label || btn.textContent;
+    btn.dataset.label = old;
+    btn.textContent = '✓ Αντιγράφηκε';
+    btn.classList.add('copied');
+    setTimeout(function () { btn.textContent = old; btn.classList.remove('copied'); }, 2000);
+  };
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(done).catch(function () { fallback(text); done(); });
+  } else { fallback(text); done(); }
+}
+function fallback(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); } catch (e) {}
+  document.body.removeChild(ta);
+}
+</script>
+
+<script>
+const FW = {
+  PICO:   [["P","Population — Πληθυσμός"],["I","Intervention — Παρέμβαση"],["C","Comparator — Σύγκριση"],["O","Outcomes — Αποτελέσματα"],["S","Study design (προαιρετικό)"]],
+  PECO:   [["P","Population"],["E","Exposure — Έκθεση"],["C","Comparator"],["O","Outcomes"]],
+  SPIDER: [["S","Sample — Δείγμα"],["PI","Phenomenon of Interest"],["D","Design — Σχεδιασμός"],["E","Evaluation — Αξιολόγηση"],["R","Research type"]],
+  PEO:    [["P","Population"],["E","Exposure"],["O","Outcome"]],
+  SPICE:  [["S","Setting — Πλαίσιο"],["P","Perspective — Σκοπιά"],["I","Intervention"],["C","Comparison"],["E","Evaluation"]],
+};
+const DEFAULT_BLOCKS = { PICO:["Population","Intervention"], PECO:["Population","Exposure"], SPIDER:["Sample","Phenomenon of Interest"], PEO:["Population","Exposure"], SPICE:["Setting","Intervention"] };
+function esc(s){ return s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function setFramework(){
+  const k = document.getElementById('fw').value;
+  document.getElementById('fw-fields').innerHTML = FW[k].map(([l,n]) =>
+    `<div><label>${l} — ${n.split(' — ')[1] || n}</label><input type="text" placeholder="στα ελληνικά, ελεύθερα"></div>`).join('');
+  const box = document.getElementById('blocks');
+  const empty = [...box.querySelectorAll('.term')].length === 0;
+  if (empty) { box.innerHTML = ''; DEFAULT_BLOCKS[k].forEach(addBlock); }
+  build();
+}
+let n = 0;
+function addBlock(name){
+  n++;
+  const d = document.createElement('div');
+  d.className = 'blk'; d.style.marginBottom = 'var(--space-4)';
+  d.innerHTML = `<label>Έννοια ${n}</label>
+    <input type="text" class="bname" value="${esc(name||'')}" placeholder="όνομα έννοιας" oninput="build()">
+    <div class="tags-area" style="display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem;padding:.5rem;background:var(--paper-warm);border:2px dashed var(--rule);border-radius:var(--r-md);">
+      <input class="tin" placeholder="αγγλικός όρος + Enter" style="border:none;background:transparent;outline:none;flex:1;min-width:10rem;font-family:var(--font-body);font-size:.92rem;padding:.3rem;">
+    </div>
+    <button class="btn btn-sm btn-outline" style="margin-top:.4rem;padding:.25rem .8rem;font-size:.78rem;" onclick="this.parentElement.remove();build();">Αφαίρεση έννοιας</button>`;
+  d.querySelector('.tin').addEventListener('keydown', e => {
+    if ((e.key === 'Enter' || e.key === ',') && e.target.value.trim()) {
+      e.preventDefault();
+      const s = document.createElement('span');
+      s.className = 'term';
+      s.style.cssText = 'background:var(--coral);color:#fff;border-radius:999px;padding:.2rem .7rem;font-size:.85rem;font-weight:700;display:inline-flex;gap:.4rem;align-items:center;';
+      s.dataset.v = e.target.value.trim().replace(/"/g,'');
+      s.innerHTML = esc(s.dataset.v) + ' <button style="background:none;border:none;color:#fff;cursor:pointer;font-size:1rem;line-height:1;" aria-label="αφαίρεση">×</button>';
+      s.querySelector('button').onclick = () => { s.remove(); build(); };
+      e.target.parentElement.insertBefore(s, e.target);
+      e.target.value = ''; build();
+    }
+  });
+  document.getElementById('blocks').appendChild(d);
+}
+function query(){
+  return [...document.querySelectorAll('.blk')].map(b => {
+    const t = [...b.querySelectorAll('.term')].map(x => /\s/.test(x.dataset.v) ? `"${x.dataset.v}"` : x.dataset.v);
+    if (!t.length) return null;
+    return t.length === 1 ? t[0] : '(' + t.join(' OR ') + ')';
+  }).filter(Boolean).join(' AND ');
+}
+function build(){ const q = query(); document.getElementById('out').textContent = q || 'Πρόσθεσε όρους στις έννοιες.'; }
+function openEric(){ const q = query(); if (!q) { alert('Πρόσθεσε πρώτα όρους.'); return; } window.open('https://eric.ed.gov/?q=' + encodeURIComponent(q), '_blank', 'noopener'); }
+setFramework();
+</script>
+</body>
+</html>
