@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Διδάσκοντες/ουσες · Από το Prompt στη Δήλωση · Copilot Edition</title>
+  <meta name="description" content="Οδηγός διδασκόντων για το σεμινάριο Copilot Edition: προετοιμασία, Teams, σενάρια, εναλλακτικό σχέδιο.">
+  <link rel="stylesheet" href="assets/style.css">
+  
+</head>
+<body>
+<div id="password-gate">
+  <div class="gate-card">
+    <div class="gate-icon">🔒</div>
+    <h1 class="gate-title">Υλικό για <span class="hand">διδάσκοντες/ουσες</span></h1>
+    <p class="gate-msg">Αν <em>βρέθηκες εδώ κατά λάθος</em>, γύρνα στην αρχική.</p>
+    <p class="gate-msg">Αλλιώς, <strong>γράψε τον κωδικό</strong> για να συνεχίσεις:</p>
+    <div class="gate-form">
+      <input type="password" id="gate-password" class="gate-input" placeholder="• • • • • • •" autocomplete="off">
+      <button onclick="checkPassword()" class="gate-btn">Είσοδος <span class="arrow">→</span></button>
+      <p id="gate-error" class="gate-error">Λάθος κωδικός. Δοκίμασε ξανά.</p>
+    </div>
+    <a href="index.html" class="gate-back">← Επιστροφή στην αρχική</a>
+  </div>
+</div>
+<script>
+  // ΑΛΛΑΞΕ ΤΟΝ ΚΩΔΙΚΟ ΕΔΩ πριν από την ανάρτηση:
+  const INSTRUCTOR_PASSWORD = "copilot2026";
+  const GATE_KEY = "instructor_unlocked_copilot";
+  if (sessionStorage.getItem(GATE_KEY) === 'yes') { document.getElementById('password-gate').style.display = 'none'; } else { document.body.classList.add('gate-locked'); }
+  function checkPassword() {
+    const input = document.getElementById('gate-password');
+    const error = document.getElementById('gate-error');
+    if (input.value === INSTRUCTOR_PASSWORD) {
+      document.getElementById('password-gate').style.display = 'none';
+      document.body.classList.remove('gate-locked');
+      sessionStorage.setItem(GATE_KEY, 'yes');
+    } else {
+      error.classList.add('show'); input.value = '';
+      setTimeout(function () { error.classList.remove('show'); }, 3000);
+    }
+  }
+  document.getElementById('gate-password').addEventListener('keypress', function (e) { if (e.key === 'Enter') { e.preventDefault(); checkPassword(); } });
+  document.getElementById('gate-password').focus();
+</script>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><span class="spark">Από</span> το Prompt στη Δήλωση</a>
+    <ul class="nav-links"><li><a href="index.html">Αρχική</a></li><li><a href="prepare.html">Προετοιμασία</a></li><li><a href="copilot.html">Οδηγός Copilot</a></li><li><a href="session-1.html">Συνάντηση 1</a></li><li><a href="session-2.html">Συνάντηση 2</a></li><li><a href="prompts.html">Prompts</a></li><li><a href="materials.html">Υλικό</a></li><li><a href="instructor.html" class="active">Διδάσκοντες/ουσες</a></li></ul>
+  </div>
+</nav>
+
+<header class="hero hero-sm">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="eyebrow fade-up">Για διδάσκοντες/ουσες · Copilot Edition</div>
+        <h1 class="hero-title fade-up">Οδηγός <span class="hand">διδάσκοντα</span></h1>
+        <p class="hero-subtitle fade-up">Ό,τι χρειάζεσαι για να τρέξεις το σεμινάριο εξ αποστάσεως: προετοιμασία, ρυθμίσεις Teams, απαντήσεις στα σενάρια και τι κάνεις όταν κάτι δεν δουλεύει.</p>
+        
+        
+      </div>
+      <div class="hero-illo">
+        <div class="hero-shape shape-1"></div>
+        <div class="hero-shape shape-2"></div>
+        <div class="hero-shape shape-3"></div>
+        <div class="hero-shape shape-4"></div>
+        <div class="hero-label">🎙<br><span>backstage ✦</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="tight">
+  <div class="container">
+    <div class="card">
+      <h3>Μία εβδομάδα πριν</h3>
+      <ul class="checks">
+        <li><input type="checkbox"><span>Επιβεβαίωσε με την υπηρεσία πληροφορικής ότι οι φοιτητές/τριες έχουν Copilot Chat με ιδρυματική σύνδεση (ασπίδα).</span></li>
+        <li><input type="checkbox"><span>Στείλε τον σύνδεσμο της σελίδας <a href="prepare.html">Προετοιμασία</a> και ζήτα να γίνει η δοκιμαστική ερώτηση πριν από το σεμινάριο.</span></li>
+        <li><input type="checkbox"><span>Δημιούργησε τη σύσκεψη Teams. Στις επιλογές σύσκεψης, άφησε ανοιχτό το chat και επίτρεψε την κοινή χρήση οθόνης στους/στις συμμετέχοντες/ουσες.</span></li>
+        <li><input type="checkbox"><span>Ετοίμασε δύο άρθρα ανοιχτής πρόσβασης σε PDF για την επίδειξη και για όσους/ες δεν φέρουν δικά τους.</span></li>
+        <li><input type="checkbox"><span>Δοκίμασε όλα τα prompts των επιδείξεων στο Copilot την ίδια εβδομάδα: οι απαντήσεις αλλάζουν.</span></li>
+      </ul>
+    </div>
+
+    <div class="card c-teal">
+      <h3>Στη διάρκεια</h3>
+      <ul>
+        <li><strong>Δύο οθόνες ή δύο παράθυρα:</strong> Teams στο ένα, Copilot στο άλλο. Μοιράζεσαι μόνο το παράθυρο του Copilot, όχι όλη την οθόνη.</li>
+        <li><strong>Χρόνος δοκιμής:</strong> 5–10 λεπτά, με χρονόμετρο στην οθόνη. Οι μεταβάσεις εξ αποστάσεως τρώνε χρόνο. Κράτα 2–3 δοκιμές ανά τρίωρο.</li>
+        <li><strong>Ολομέλεια:</strong> κάλεσε 2–3 άτομα ονομαστικά να μοιραστούν οθόνη ή να επικολλήσουν στο chat. Όποιος/α δεν θέλει, γράφει μόνο στο chat.</li>
+        <li><strong>Ψηφοφορίες:</strong> για τα σενάρια αρκεί το chat (Α / Β / Γ). Αν προτιμάς, φτιάξε ένα Microsoft Forms.</li>
+        <li><strong>Δείξε και τα λάθη:</strong> αν στην επίδειξη το Copilot δώσει ανύπαρκτη παραπομπή, είναι δώρο. Σταμάτα και έλεγξέ την ζωντανά.</li>
+      </ul>
+    </div>
+
+    <div class="card c-sun">
+      <h3>Απαντήσεις στα σενάρια (Συνάντηση 1)</h3>
+      <div class="tbl-wrap"><table class="tbl">
+        <tr><th>Σενάριο</th><th>Αποδεκτό;</th><th>Σχόλιο</th></tr>
+        <tr><td><strong>Η περίληψη</strong></td><td>Όχι, όπως έγινε.</td><td>Κείμενο της ΤΝ παρουσιάζεται ως δικό της (αρχή i). Αποδεκτό γίνεται αν γράψει η ίδια την περίληψη και χρησιμοποιήσει το Copilot μόνο για γλωσσική επιμέλεια, με δήλωση (αρχή iii).</td></tr><tr><td><strong>Τα αγγλικά</strong></td><td>Ναι.</td><td>Γλωσσική επιμέλεια δικού του κειμένου χωρίς αλλαγή νοήματος. Δηλώνεται (αρχή iii). Καλό σημείο για να δείξετε το Prompt 8, που ζητά και λίστα των αλλαγών.</td></tr><tr><td><strong>Οι πέντε πηγές</strong></td><td>Όχι.</td><td>Μη επαληθευμένες παραπομπές (αρχή i). Συνδέστε το με το «κυνήγι παραπομπών» της 2ης συνάντησης: αφήστε την ομάδα να το διαπιστώσει μόνη της.</td></tr><tr><td><strong>Το ερευνητικό ερώτημα</strong></td><td>Όχι, όπως έγινε.</td><td>Η διατύπωση του ερωτήματος είναι ο πυρήνας της ερευνητικής συμβολής (αρχή ii). Αποδεκτό αν το Copilot λειτουργήσει ως συνομιλητής που κάνει ερωτήσεις (Prompt 2) και το ερώτημα το διατυπώσει ο ίδιος.</td></tr><tr><td><strong>Ο μαθητής της τάξης</strong></td><td>Όχι, σε καμία περίπτωση.</td><td>Δεν είναι ζήτημα HEAL-Link αλλά προστασίας προσωπικών δεδομένων ανηλίκου (ειδική κατηγορία δεδομένων υγείας). Η ασπίδα δεν το αλλάζει. Επίσης: οι στόχοι παρέμβασης για συγκεκριμένο παιδί είναι επαγγελματική κρίση.</td></tr>
+      </table></div>
+    </div>
+
+    <div class="card c-sage">
+      <h3>Όταν κάτι δεν δουλεύει</h3>
+      <div class="tbl-wrap"><table class="tbl">
+        <tr><th>Πρόβλημα</th><th>Τι κάνεις</th></tr>
+        <tr><td>Κάποιος/α δεν βλέπει την ασπίδα</td><td>Αποσύνδεση από όλους τους λογαριασμούς Microsoft στον browser, ιδιωτικό παράθυρο, σύνδεση με ιδρυματικό email.</td></tr>
+        <tr><td>Δεν ανεβαίνει το PDF</td><td>Μικρότερο αρχείο ή αντιγραφή του κειμένου (περίληψη και αποτελέσματα) απευθείας στο πλαίσιο γραφής.</td></tr>
+        <tr><td>Το Copilot δεν απαντά ή είναι αργό για όλους</td><td>Περνάς σε «μόνο επίδειξη»: δοκιμάζεις εσύ τα prompts στη δική σου οθόνη και οι συμμετέχοντες/ουσες προτείνουν αλλαγές στο chat.</td></tr>
+        <tr><td>Διαφορετικές απαντήσεις στο ίδιο prompt</td><td>Δεν είναι πρόβλημα, είναι υλικό συζήτησης: τα γλωσσικά μοντέλα δεν είναι ντετερμινιστικά.</td></tr>
+        <tr><td>Κάποιος/α ανεβάζει προσωπικά δεδομένα μαθητή</td><td>Σταμάτα διακριτικά και επανάλαβε τον κανόνα στην ολομέλεια, χωρίς να εκθέσεις το άτομο.</td></tr>
+      </table></div>
+    </div>
+
+    <div class="box box-warn" style="max-width:46rem;">
+      <strong>Πριν από την ανάρτηση</strong>
+      <p>Άλλαξε τον κωδικό αυτής της σελίδας στο αρχείο <code>instructor.html</code> (γραμμή <code>INSTRUCTOR_PASSWORD</code>). Ο κωδικός προστατεύει μόνο από τυχαίους επισκέπτες: όποιος ανοίξει τον κώδικα της σελίδας τον βλέπει.</p>
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="hand">Από</span> το Prompt στη Δήλωση</div>
+        <p class="footer-text">Σεμινάριο υπεύθυνης χρήσης της Παραγωγικής ΤΝ στη βιβλιογραφική ανασκόπηση, με το Microsoft Copilot. Σύμφωνα με τις κατευθυντήριες γραμμές HEAL-Link / ΣΕΑΒ.</p>
+        <p class="footer-text" style="margin-top:1rem;">Σχεδιασμένο για το <a href="https://maspecialed.sed.uth.gr/perigrammata-mathimatwn/" target="_blank" rel="noopener" style="color:var(--sun);">ΠΜΣ Ειδικής Αγωγής, Πανεπιστήμιο Θεσσαλίας</a>.</p>
+      </div>
+      <div>
+        <h5>Σελίδες</h5>
+        <ul>
+          <li><a href="prepare.html">Προετοιμασία</a></li>
+          <li><a href="copilot.html">Οδηγός Copilot</a></li>
+          <li><a href="verify.html">Έλεγχος παραπομπών</a></li>
+          <li><a href="statement.html">Δήλωση Χρήσης ΤΝ</a></li>
+          <li><a href="about.html">Σχετικά</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Σύνδεσμοι</h5>
+        <ul>
+          <li><a href="https://m365.cloud.microsoft/chat" target="_blank" rel="noopener">Microsoft 365 Copilot Chat</a></li>
+          <li><a href="https://eric.ed.gov" target="_blank" rel="noopener">ERIC</a></li>
+          <li><a href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar</a></li>
+          <li><a href="https://www.doi.org" target="_blank" rel="noopener">doi.org</a></li>
+          <li><a href="https://www.heal-link.gr/" target="_blank" rel="noopener">HEAL-Link</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 · Ανοιχτό εκπαιδευτικό υλικό · CC BY-NC-SA 4.0</div>
+      <div>Copilot Edition · v1.0</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

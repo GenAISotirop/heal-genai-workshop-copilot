@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Έλεγχος παραπομπών · Από το Prompt στη Δήλωση · Copilot Edition</title>
+  <meta name="description" content="Πώς ελέγχεις αν μια παραπομπή που έδωσε το Copilot υπάρχει και είναι σωστή: doi.org, Google Scholar, ERIC.">
+  <link rel="stylesheet" href="assets/style.css">
+  
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><span class="spark">Από</span> το Prompt στη Δήλωση</a>
+    <ul class="nav-links"><li><a href="index.html">Αρχική</a></li><li><a href="prepare.html">Προετοιμασία</a></li><li><a href="copilot.html">Οδηγός Copilot</a></li><li><a href="session-1.html">Συνάντηση 1</a></li><li><a href="session-2.html" class="active">Συνάντηση 2</a></li><li><a href="prompts.html">Prompts</a></li><li><a href="materials.html">Υλικό</a></li><li><a href="instructor.html">Διδάσκοντες/ουσες</a></li></ul>
+  </div>
+</nav>
+
+<header class="hero hero-sm">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="eyebrow fade-up">Ενότητα 4 · Επαλήθευση</div>
+        <h1 class="hero-title fade-up">Έλεγχος <span class="hand">παραπομπών</span></h1>
+        <p class="hero-subtitle fade-up">Τα γλωσσικά μοντέλα μπορεί να «κατασκευάσουν» άρθρα που μοιάζουν αληθινά: σωστοί συγγραφείς, λάθος περιοδικό, ανύπαρκτο DOI. Κάθε παραπομπή ελέγχεται πριν μπει στην εργασία σου.</p>
+        <div class="cta-group fade-up"><a href="downloads/04_Reference_Check.docx" download class="btn btn-sm">⬇ Λίστα ελέγχου σε .docx</a></div>
+        
+      </div>
+      <div class="hero-illo">
+        <div class="hero-shape shape-1"></div>
+        <div class="hero-shape shape-2"></div>
+        <div class="hero-shape shape-3"></div>
+        <div class="hero-shape shape-4"></div>
+        <div class="hero-label">✓?<br><span>verify, don't trust ✦</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="tight">
+  <div class="container">
+    <div class="section-eyebrow">✷ Η διαδικασία</div>
+    <h2 class="section-title">Τέσσερα <span class="accent">βήματα</span></h2>
+    <ol class="steps">
+      <li><h4>Υπάρχει το DOI;</h4><p>Άνοιξε <code>https://doi.org/</code> και μετά το DOI. Αν βγει σφάλμα «DOI not found», η παραπομπή είναι ύποπτη.</p></li>
+      <li><h4>Οδηγεί στο ίδιο άρθρο;</h4><p>Συχνά το DOI υπάρχει, αλλά ανήκει σε άλλο άρθρο. Σύγκρινε τίτλο, συγγραφείς, έτος και περιοδικό.</p></li>
+      <li><h4>Δεν έχει DOI;</h4><p>Ψάξε τον ακριβή τίτλο σε εισαγωγικά στο <a href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar</a> ή στο <a href="https://eric.ed.gov" target="_blank" rel="noopener">ERIC</a>. Αν δεν εμφανίζεται πουθενά, μην τη χρησιμοποιήσεις.</p></li>
+      <li><h4>Λέει πράγματι αυτό που ισχυρίστηκε το Copilot;</h4><p>Ακόμα κι αν το άρθρο υπάρχει, διάβασε τουλάχιστον την περίληψη. Το Copilot μπορεί να του αποδίδει ευρήματα που δεν έχει.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="container">
+    <div class="section-eyebrow">✷ Εργαλείο</div>
+    <h2 class="section-title">Γρήγορος <span class="accent">έλεγχος</span></h2>
+    <p class="section-lead">Επικόλλησε ένα DOI ή έναν τίτλο. Το εργαλείο ανοίγει τις σωστές σελίδες αναζήτησης. Τον έλεγχο τον κάνεις εσύ.</p>
+    <div class="card form-card" style="max-width:46rem;">
+      <label for="doi">DOI (π.χ. 10.1007/s10803-020-04751-x)</label>
+      <input type="text" id="doi" placeholder="10.xxxx/xxxxx">
+      <label for="ttl">ή Τίτλος άρθρου</label>
+      <input type="text" id="ttl" placeholder="Ακριβής τίτλος">
+      <div class="cta-group" style="margin-top:var(--space-4);">
+        <button class="btn btn-sm" onclick="openDoi()">Άνοιγμα στο doi.org</button>
+        <button class="btn btn-sm btn-outline" onclick="openScholar()">Google Scholar</button>
+        <button class="btn btn-sm btn-outline" onclick="openEric()">ERIC</button>
+      </div>
+      <p id="doi-msg" style="margin-top:var(--space-3);font-size:.9rem;color:var(--sage);"></p>
+    </div>
+
+    <div class="card c-teal form-card" style="max-width:46rem;">
+      <h3>Λίστα ελέγχου ανά παραπομπή</h3>
+      <ul class="checks">
+        <li><input type="checkbox" class="ck"><span>Το άρθρο <strong>υπάρχει</strong> (DOI ή εύρεση σε Scholar/ERIC).</span></li>
+        <li><input type="checkbox" class="ck"><span>Οι <strong>συγγραφείς</strong> είναι οι ίδιοι.</span></li>
+        <li><input type="checkbox" class="ck"><span>Το <strong>έτος</strong> είναι το ίδιο.</span></li>
+        <li><input type="checkbox" class="ck"><span>Το <strong>περιοδικό</strong> (τόμος, τεύχος, σελίδες) είναι το ίδιο.</span></li>
+        <li><input type="checkbox" class="ck"><span>Το άρθρο <strong>λέει πράγματι</strong> αυτό για το οποίο το χρησιμοποιώ.</span></li>
+      </ul>
+      <p id="ck-result" class="box box-warn" style="margin-bottom:0;">Τσέκαρε όλα τα κουτάκια πριν βάλεις την παραπομπή στην εργασία σου.</p>
+      <button class="btn btn-sm btn-outline" style="margin-top:var(--space-3);" onclick="resetChecks()">Επόμενη παραπομπή ↺</button>
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="hand">Από</span> το Prompt στη Δήλωση</div>
+        <p class="footer-text">Σεμινάριο υπεύθυνης χρήσης της Παραγωγικής ΤΝ στη βιβλιογραφική ανασκόπηση, με το Microsoft Copilot. Σύμφωνα με τις κατευθυντήριες γραμμές HEAL-Link / ΣΕΑΒ.</p>
+        <p class="footer-text" style="margin-top:1rem;">Σχεδιασμένο για το <a href="https://maspecialed.sed.uth.gr/perigrammata-mathimatwn/" target="_blank" rel="noopener" style="color:var(--sun);">ΠΜΣ Ειδικής Αγωγής, Πανεπιστήμιο Θεσσαλίας</a>.</p>
+      </div>
+      <div>
+        <h5>Σελίδες</h5>
+        <ul>
+          <li><a href="prepare.html">Προετοιμασία</a></li>
+          <li><a href="copilot.html">Οδηγός Copilot</a></li>
+          <li><a href="verify.html">Έλεγχος παραπομπών</a></li>
+          <li><a href="statement.html">Δήλωση Χρήσης ΤΝ</a></li>
+          <li><a href="about.html">Σχετικά</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Σύνδεσμοι</h5>
+        <ul>
+          <li><a href="https://m365.cloud.microsoft/chat" target="_blank" rel="noopener">Microsoft 365 Copilot Chat</a></li>
+          <li><a href="https://eric.ed.gov" target="_blank" rel="noopener">ERIC</a></li>
+          <li><a href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar</a></li>
+          <li><a href="https://www.doi.org" target="_blank" rel="noopener">doi.org</a></li>
+          <li><a href="https://www.heal-link.gr/" target="_blank" rel="noopener">HEAL-Link</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 · Ανοιχτό εκπαιδευτικό υλικό · CC BY-NC-SA 4.0</div>
+      <div>Copilot Edition · v1.0</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function val(id){ return document.getElementById(id).value.trim(); }
+function openDoi(){
+  let d = val('doi').replace(/^https?:\/\/(dx\.)?doi\.org\//i,'').replace(/^doi:\s*/i,'');
+  const m = document.getElementById('doi-msg');
+  if(!d){ m.textContent='Γράψε πρώτα ένα DOI.'; return; }
+  if(!/^10\.\d{4,9}\//.test(d)){ m.textContent='Αυτό δεν μοιάζει με DOI: ένα DOI ξεκινά με «10.» και έναν αριθμό, π.χ. 10.1007/…'; return; }
+  m.textContent=''; window.open('https://doi.org/'+encodeURI(d),'_blank','noopener');
+}
+function q(){ return val('ttl') || val('doi'); }
+function openScholar(){ const t=q(); if(!t){document.getElementById('doi-msg').textContent='Γράψε τίτλο ή DOI.';return;} window.open('https://scholar.google.com/scholar?q='+encodeURIComponent('"'+t+'"'),'_blank','noopener'); }
+function openEric(){ const t=q(); if(!t){document.getElementById('doi-msg').textContent='Γράψε τίτλο ή DOI.';return;} window.open('https://eric.ed.gov/?q='+encodeURIComponent('"'+t+'"'),'_blank','noopener'); }
+const cks=[...document.querySelectorAll('.ck')]; const res=document.getElementById('ck-result');
+function upd(){ const n=cks.filter(c=>c.checked).length;
+  if(n===cks.length){ res.className='box box-ok'; res.textContent='✓ Η παραπομπή επαληθεύτηκε. Μπορείς να τη χρησιμοποιήσεις.'; }
+  else { res.className='box box-warn'; res.textContent='Ελέγχθηκαν '+n+' από '+cks.length+'. Μην τη χρησιμοποιήσεις ακόμα.'; }
+  res.style.marginBottom='0'; }
+cks.forEach(c=>c.addEventListener('change',upd));
+function resetChecks(){ cks.forEach(c=>c.checked=false); document.getElementById('doi').value=''; document.getElementById('ttl').value=''; upd(); }
+</script>
+</body>
+</html>
